@@ -67,8 +67,20 @@
 <!--                                <assembly>-->
 <!--                                    <descriptor>docker-assembly.xml</descriptor>-->
 <!--                                </assembly>-->
+                                <assembly>
+                                    <inline>
+                                        <dependencySets>
+                                            <dependencySet>
+                                                <includes>
+                                                    <include>app.bastiannolte.examples.jee:todolist</include>
+                                                </includes>
+                                                  <outputDirectory>/opt/jboss/wildfly/standalone/deployments/</outputDirectory>
+                                                <outputFileNameMapping>todolist.war</outputFileNameMapping>
+                                            </dependencySet>
+                                        </dependencySets>
+                                    </inline>
+                                </assembly>
                             </build>
-
                             <run>
                                 <ports>
                                     <port>wildfly.port:8080</port>
