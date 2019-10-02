@@ -1,0 +1,2 @@
+FROM tomee:latest
+COPY target/todolist.war /usr/local/tomee/webapps/
