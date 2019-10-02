@@ -46,9 +46,7 @@
         </dependency>
     </dependencies>
 
-
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <!-- Docker build -->
             <plugin>
@@ -64,9 +62,9 @@
 
                             <build>
                                 <from>jboss/wildfly:latest</from>
-<!--                                <assembly>-->
-<!--                                    <descriptor>docker-assembly.xml</descriptor>-->
-<!--                                </assembly>-->
+                                <!--                                <assembly>-->
+                                <!--                                    <descriptor>docker-assembly.xml</descriptor>-->
+                                <!--                                </assembly>-->
                                 <assembly>
                                     <inline>
                                         <dependencySets>
@@ -74,11 +72,14 @@
                                                 <includes>
                                                     <include>app.bastiannolte.examples.jee:todolist</include>
                                                 </includes>
-                                                  <outputDirectory>/opt/jboss/wildfly/standalone/deployments/</outputDirectory>
+                                                <outputDirectory>.</outputDirectory>
                                                 <outputFileNameMapping>todolist.war</outputFileNameMapping>
+                                                <!--                                                <useProjectArtifact>false</useProjectArtifact>-->
                                             </dependencySet>
                                         </dependencySets>
                                     </inline>
+                                    <basedir>/opt/jboss/wildfly/standalone/deployments</basedir>
+                                    <user>jboss:jboss:jboss</user>
                                 </assembly>
                             </build>
                             <run>
