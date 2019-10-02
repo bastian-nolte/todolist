@@ -1,9 +1,11 @@
 package app.bastiannolte.examples.jee;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+@ApplicationScoped
 public class TodoService {
 
     public List<Todo> liefereAlleTodos() {
