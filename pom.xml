@@ -49,43 +49,5 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
-        <plugins>
-            <!-- Docker build -->
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.31.0</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <images>
-                        <image>
-                            <alias>todolist</alias>
-                            <name>bastiannolte/dev/todolist:${project.version}</name>
-
-                            <build>
-                                <from>tomee:latest</from>
-<!--                                <assembly>-->
-<!--                                    <descriptor>docker-assembly.xml</descriptor>-->
-<!--                                </assembly>-->
-                            </build>
-                            <run>
-                                <ports>
-                                    <port>tomcat.port:8080</port>
-                                </ports>
-                                <wait>
-                                    <http>
-                                        <url>http://localhost:8080/api/todo</url>
-                                    </http>
-                                    <time>10000</time>
-                                </wait>
-
-                            </run>
-                        </image>
-
-
-                    </images>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
 </project>
