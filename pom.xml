@@ -72,12 +72,12 @@
                                 <ports>
                                     <port>8080:8080</port>
                                 </ports>
-<!--                                <wait>-->
-<!--                                    <http>-->
-<!--                                        <url>http://localhost:8080/api/todo</url>-->
-<!--                                    </http>-->
-<!--                                    <time>10000</time>-->
-<!--                                </wait>-->
+                                <wait>
+                                    <http>
+                                        <url>http://localhost:8080/rest/todo</url>
+                                    </http>
+                                    <time>20000</time>
+                                </wait>
                             </run>
                         </image>
                     </images>
