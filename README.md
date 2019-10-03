@@ -1,8 +1,8 @@
-### Dieses Project bauen und starten
+### Dieses Projekt bauen und starten
 #### Voraussetzung
-Eine installierte Dockeumgebung
+Eine installierte Dockerumgebung
 
-#### Gitprojekt clonen
+#### Gitprojekt klonen
 ```
 git clone https://github.com/bastian-nolte/todolist.git
 ```
@@ -29,8 +29,8 @@ Dockercontainer wieder stoppen
 mvn docker:stop
 ```
 
-#### Problembehebung`
+#### Problembehebung
 Dockerumgebnung aufräumen
 ```
 docker system prune
-``
+```
