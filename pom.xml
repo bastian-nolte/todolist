@@ -55,6 +55,7 @@
                 <version>0.31.0</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <verbose>all</verbose>
                     <images>
                         <image>
                             <alias>todolist</alias>
@@ -62,36 +63,21 @@
 
                             <build>
                                 <from>jboss/wildfly:latest</from>
-                                <!--                                <assembly>-->
-                                <!--                                    <descriptor>docker-assembly.xml</descriptor>-->
-                                <!--                                </assembly>-->
                                 <assembly>
-                                    <inline>
-                                        <dependencySets>
-                                            <dependencySet>
-                                                <includes>
-                                                    <include>app.bastiannolte.examples.jee:todolist</include>
-                                                </includes>
-                                                <outputDirectory>.</outputDirectory>
-                                                <outputFileNameMapping>todolist.war</outputFileNameMapping>
-                                                <!--                                                <useProjectArtifact>false</useProjectArtifact>-->
-                                            </dependencySet>
-                                        </dependencySets>
-                                    </inline>
                                     <basedir>/opt/jboss/wildfly/standalone/deployments</basedir>
-                                    <user>jboss:jboss:jboss</user>
+                                    <descriptorRef>rootWar</descriptorRef>
                                 </assembly>
                             </build>
                             <run>
                                 <ports>
-                                    <port>wildfly.port:8080</port>
+                                    <port>8080:8080</port>
                                 </ports>
-                                <wait>
-                                    <http>
-                                        <url>http://localhost:8080/todolist/api/todo</url>
-                                    </http>
-                                    <time>10000</time>
-                                </wait>
+<!--                                <wait>-->
+<!--                                    <http>-->
+<!--                                        <url>http://localhost:8080/api/todo</url>-->
+<!--                                    </http>-->
+<!--                                    <time>10000</time>-->
+<!--                                </wait>-->
                             </run>
                         </image>
                     </images>
