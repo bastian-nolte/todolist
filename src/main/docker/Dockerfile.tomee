@@ -1,2 +1,0 @@
-FROM jboss/wildfly:latest
-COPY target/todolist.war /opt/jboss/wildfly/standalone/deployments/
