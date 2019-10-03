@@ -10,7 +10,7 @@ public class TodoService {
 
     public List<Todo> liefereAlleTodos() {
 //        return entityManager.createQuery("select t from Todo t order by t.erstelltAm").getResultList();
-        return Collections.emptyList();
+        return List.of(Todo.createTodo("Eine Aufgabe"));
     }
 
     public Todo liefereTodoMitUuid(UUID uuid) {
