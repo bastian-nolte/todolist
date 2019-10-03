@@ -55,6 +55,7 @@
                 <version>0.31.0</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <showLogs>true</showLogs>
                     <verbose>all</verbose>
                     <images>
                         <image>
@@ -77,6 +78,33 @@
                                         <url>http://localhost:8080/rest/todo</url>
                                     </http>
                                     <time>20000</time>
+                                </wait>
+                                <links>
+                                    <link>database:db</link>
+                                </links>
+                            </run>
+                        </image>
+                        <image>
+                            <alias>database</alias>
+                            <name>mysql:8.0.2</name>
+                            <run>
+                                <ports>
+                                    <port>3306:3306</port>
+                                </ports>
+                                <env>
+                                    <MYSQL_DATABASE>app.bastiannolte.examples.jee</MYSQL_DATABASE>
+                                    <MYSQL_USER>todolist</MYSQL_USER>
+                                    <MYSQL_PASSWORD>devpwd</MYSQL_PASSWORD>
+                                    <MYSQL_ROOT_PASSWORD>rtpwd123</MYSQL_ROOT_PASSWORD>
+                                </env>
+<!--                                <volumes>-->
+<!--                                    <bind>-->
+<!--                                        <volume>${project.basedir}/scripts:/docker-entrypoint-initdb.d</volume>-->
+<!--                                    </bind>-->
+<!--                                </volumes>-->
+                                <wait>
+                                    <log>.*ready for connections.*</log>
+                                    <time>30000</time>
                                 </wait>
                             </run>
                         </image>
