@@ -10,7 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
         <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -24,7 +24,7 @@
             <version>8.0.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Aviod getter setter jungle -->
+        <!-- Never write another getter or equals method again -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -43,6 +43,24 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- MySQL-Database Support (deprecated) -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.17</version>
         </dependency>
     </dependencies>
 
@@ -63,7 +81,7 @@
                             <name>bastiannolte/dev/todolist:${project.version}</name>
 
                             <build>
-                                <from>jboss/wildfly:latest</from>
+                                <from>arungupta/wildfly-mysql-javaee7:latest</from>
                                 <assembly>
                                     <basedir>/opt/jboss/wildfly/standalone/deployments</basedir>
                                     <descriptorRef>rootWar</descriptorRef>
@@ -73,12 +91,12 @@
                                 <ports>
                                     <port>8080:8080</port>
                                 </ports>
-                                <wait>
-                                    <http>
-                                        <url>http://localhost:8080/rest/todo</url>
-                                    </http>
-                                    <time>20000</time>
-                                </wait>
+<!--                                <wait>-->
+<!--                                    <http>-->
+<!--                                        <url>http://localhost:8080/rest/todo</url>-->
+<!--                                    </http>-->
+<!--                                    <time>20000</time>-->
+<!--                                </wait>-->
                                 <links>
                                     <link>database:db</link>
                                 </links>
@@ -97,11 +115,11 @@
                                     <MYSQL_PASSWORD>devpwd</MYSQL_PASSWORD>
                                     <MYSQL_ROOT_PASSWORD>rtpwd123</MYSQL_ROOT_PASSWORD>
                                 </env>
-<!--                                <volumes>-->
-<!--                                    <bind>-->
-<!--                                        <volume>${project.basedir}/scripts:/docker-entrypoint-initdb.d</volume>-->
-<!--                                    </bind>-->
-<!--                                </volumes>-->
+                                <!--                                <volumes>-->
+                                <!--                                    <bind>-->
+                                <!--                                        <volume>${project.basedir}/scripts:/docker-entrypoint-initdb.d</volume>-->
+                                <!--                                    </bind>-->
+                                <!--                                </volumes>-->
                                 <wait>
                                     <log>.*ready for connections.*</log>
                                     <time>30000</time>

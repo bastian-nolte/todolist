@@ -29,10 +29,5 @@ public class TodoRessource {
     public Response postTodo(String text) {
         return Response.ok(todoService.erstelleTodo(text)).build();
     }
-
-    @GET
-    public Response sayHello() {
-        return Response.ok("Hello").build();
-    }
 }
 
