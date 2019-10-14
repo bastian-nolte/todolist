@@ -3,10 +3,15 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <!-- Define persistence unit -->
-    <persistence-unit name="todolist-persistence-unit">
+    <persistence-unit name="TodolistPersistenceUnit">
         <jta-data-source>java:jboss/datasources/exampleDS</jta-data-source>
         <properties>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.import_files" value="initial_data.sql"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

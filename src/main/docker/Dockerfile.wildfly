@@ -1,0 +1,3 @@
+FROM jboss/wildfly:latest
+# Service in der Wurzel des Applikationsservers deployen.
+COPY target/todolist*.war /opt/jboss/wildfly/standalone/deployments/ROOT.war

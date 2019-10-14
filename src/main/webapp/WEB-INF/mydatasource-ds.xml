@@ -1,10 +1,10 @@
 <datasources xmlns="http://www.jboss.org/ironjacamar/schema">
     <datasource jndi-name="java:jboss/datasources/exampleDS" pool-name="exampleDS">
-        <driver>embedded-mysql.war_com.mysql.cj.jdbc.Driver_8_0</driver>
-        <connection-url>jdbc:mysql://localhost:3306/app.bastiannolte.examples.jee?useSSL=false&amp;serverTimezone=UTC</connection-url>
+        <driver>ROOT.war_com.mysql.cj.jdbc.Driver_8_0</driver>
+        <connection-url>jdbc:mysql://todolistdb:3306/app.bastiannolte.examples.jee?useSSL=false&amp;serverTimezone=UTC</connection-url>
         <security>
-            <user-name>root</user-name>
-            <password>rtpwd123</password>
+            <user-name>todolist</user-name>
+            <password>devpwd</password>
         </security>
     </datasource>
 </datasources>
