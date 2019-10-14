@@ -1,14 +1,17 @@
 package app.bastiannolte.examples.jee;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.mockito.ArgumentCaptor;
 
 import javax.persistence.EntityManager;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
 
 @DisplayName("Der TodoService sollte…")
@@ -41,13 +44,13 @@ class TodoServiceTest {
         final Todo savedTodo = todoService.erstelleTodo(text);
 
         // check
-        verify(mockedEntityManager, times(1)).persist(isA(Todo.class));
+        ArgumentCaptor<Todo> argumentCaptor = ArgumentCaptor.forClass(Todo.class);
+        verify(mockedEntityManager, times(1)).persist(argumentCaptor.capture());
+        Todo persistedTodo = argumentCaptor.getValue().clone();
 
-        assertThat(savedTodo, Matchers.notNullValue());
-
-        assertThat("Der übergebene Text sollte unverändert gespeichert werden.", savedTodo.getText(), Matchers.equalTo(text));
-        assertThat("Der Member UUID sollte nicht null sein.", savedTodo.getUuid(), Matchers.notNullValue());
-        assertThat("Es sollte eine gültige UUID erzeugt worden sein.", savedTodo.getUuid().toString(), StringMatchesUUIDPattern.matchesThePatternOfAUUID());
+        assertThat("Der übergebene Text sollte unverändert gespeichert werden.", persistedTodo.getText(), is(equalTo(text)));
+        assertThat("Der Member UUID sollte nicht null sein.", persistedTodo.getUuid(), notNullValue());
+        assertThat("Das zurückgegebene Todo sollte gleich dem persistierten Objekt sein.", persistedTodo, is(savedTodo.clone()));
 
     }
 }

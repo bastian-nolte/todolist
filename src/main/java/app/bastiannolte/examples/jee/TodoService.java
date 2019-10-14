@@ -9,7 +9,7 @@ import java.util.UUID;
 @ApplicationScoped
 public class TodoService {
 
-    @PersistenceContext(unitName = "todolist-persistence-unit")
+    @PersistenceContext(unitName = "TodolistPersistenceUnit")
     EntityManager entityManager;
 
     public List liefereAlleTodos() {
