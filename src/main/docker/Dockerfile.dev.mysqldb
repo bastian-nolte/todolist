@@ -1,0 +1,25 @@
+# Dockerimage für Entwicklerdatenbank
+
+# Ein Dockerimage wird wie folgt aus der Wurzel des Services (todolist) erstellt:
+# docker build -fsrc/main/docker/Dockerfile.dev.mysqldb -tbastiannolte/dev/todolistdb .
+#
+# Der Datenbankcontainer wird wie folgt hochgefahren:
+# docker run -d --rm --name todolistdb -p 3306:3306 bastiannolte/dev/todolistdb:latest
+#
+# Der Dockercontainer kann wie folgt heruntergefahren werden:
+# docker stop todolistdb
+#
+#
+FROM mysql/mysql-server:latest as mysqlserver
+
+# Fuege Datenbank hinzu
+ENV MYSQL_DATABASE 'app.bastiannolte.examples.jee'
+ENV MYSQL_USER 'todolist'
+ENV MYSQL_PASSWORD 'devpwd'
+
+# Setze das Standardpasswortformat - Das sollte durchgeführt werden bevor ein neuer Nutzer erzeugt wird.
+RUN echo "default_authentication_plugin=mysql_native_password" >> /etc/my.cnf
+
+# Alle Skripte in docker-entrypoint-initdb.d/ werden automatisch beim starten des Containers ausgeführt.
+# COPY src/main/docker/*-db.sql /docker-entrypoint-initdb.d
+
